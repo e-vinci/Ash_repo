@@ -54,12 +54,7 @@ router.post('/delete', (req, res, next) => {
 
 /* GET details exoplanet. */
 router.get('/details', function (req, res, next) {
-    console.log("GET DETAILS EXOPLANET");
-    // convert string req.query.id to int
-    // another solution is to use == instead of === in if instruction
-    const exoplanetIdParam = parseInt(req.query.id);
-    const exoplanetFound = Exoplanet.findById(exoplanetIdParam);
-    res.render('exoplanets/details.hbs', { exoplanet: exoplanetFound });
+    getDetailsFunction(req, res);
 
 });
 
@@ -107,6 +102,15 @@ router.post('/update', function (req, res, next) {
 
 
 module.exports = router;
+function getDetailsFunction(req, res) {
+    console.log("GET DETAILS EXOPLANET");
+    // convert string req.query.id to int
+    // another solution is to use == instead of === in if instruction
+    const exoplanetIdParam = parseInt(req.query.id);
+    const exoplanetFound = Exoplanet.findById(exoplanetIdParam);
+    res.render('exoplanets/details.hbs', { exoplanet: exoplanetFound });
+}
+
 function DeleteExoplanet(req, res) {
     console.log("id Exoplanète à supprimer : " + req.body.id);
     Exoplanet.delete(req.body.id);
