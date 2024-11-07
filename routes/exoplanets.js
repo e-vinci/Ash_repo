@@ -47,9 +47,7 @@ router.get('/search', function (req, res, next) {
 });
 
 router.post('/delete', (req, res, next) => {
-    console.log("id Exoplanète à supprimer : " + req.body.id);
-    Exoplanet.delete(req.body.id);
-    res.redirect('/exoplanets');
+    DeleteExoplanet(req, res);
 });
 
 
@@ -109,6 +107,12 @@ router.post('/update', function (req, res, next) {
 
 
 module.exports = router;
+function DeleteExoplanet(req, res) {
+    console.log("id Exoplanète à supprimer : " + req.body.id);
+    Exoplanet.delete(req.body.id);
+    res.redirect('/exoplanets');
+}
+
 function SearchExoplanet(req, res) {
     console.log("GET SEARCH EXOPLANET");
     const uniqueNameExoplanetParam = req.query.uniqueNameExoplanet;
