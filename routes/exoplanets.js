@@ -43,15 +43,7 @@ router.post('/add', upload.single('imageExoplanet'), function (req, res, next) {
 
 /* GET search exoplanet. */
 router.get('/search', function (req, res, next) {
-    console.log("GET SEARCH EXOPLANET");
-    const uniqueNameExoplanetParam = req.query.uniqueNameExoplanet;
-    let min3charOK = false;
-    let exoplanetsTable = null;
-    if (uniqueNameExoplanetParam.length >= 3) {
-        min3charOK = true;
-        exoplanetsTable = Exoplanet.search(uniqueNameExoplanetParam);
-    }
-    res.render('exoplanets/index.hbs', { exoplanetsTable, min3charOK });
+    SearchExoplanet(req, res);
 });
 
 router.post('/delete', (req, res, next) => {
@@ -117,6 +109,18 @@ router.post('/update', function (req, res, next) {
 
 
 module.exports = router;
+function SearchExoplanet(req, res) {
+    console.log("GET SEARCH EXOPLANET");
+    const uniqueNameExoplanetParam = req.query.uniqueNameExoplanet;
+    let min3charOK = false;
+    let exoplanetsTable = null;
+    if (uniqueNameExoplanetParam.length >= 3) {
+        min3charOK = true;
+        exoplanetsTable = Exoplanet.search(uniqueNameExoplanetParam);
+    }
+    res.render('exoplanets/index.hbs', { exoplanetsTable, min3charOK });
+}
+
 function addExoplanet(req, res) {
     let filename = null;
     // req.file must be undefined if no file given
