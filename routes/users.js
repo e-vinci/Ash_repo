@@ -45,9 +45,7 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/register', (req, res, next) => {
-    console.log("USERS REGISTER");
-    res.render('users/register', { errors: req.session.errors });
-    req.session.errors = null;
+    enregistrer(res, req);
 
 });
 
@@ -80,6 +78,12 @@ router.post('/add', (req, res, next) => {
 });
 
 module.exports = router;
+
+function S'enregistrer(res, req) {
+    console.log("USERS REGISTER");
+    res.render('users/register', { errors: req.session.errors });
+    req.session.errors = null;
+}
 
 function demoFunction1(req, userFound, res) {
     if (bcrypt.compareSync(req.body.userPassword, userFound.password)) {
