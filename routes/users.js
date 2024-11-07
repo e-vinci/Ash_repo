@@ -79,7 +79,7 @@ router.post('/add', (req, res, next) => {
 
 module.exports = router;
 
-function S'enregistrer(res, req) {
+function enregistrer(res, req) {
     console.log("USERS REGISTER");
     res.render('users/register', { errors: req.session.errors });
     req.session.errors = null;
